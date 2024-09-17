@@ -16,15 +16,18 @@
 // Rename the default wifi network name and password (the part inside the quotations) with your team name and custom password.
 // Note: make sure the password is at least 8 characters long.
 // You'll need to reconnect to the WiFi again after this.
-const char *ssid = "wem-rc-1"; // *
-const char *password = "wem"; // *
+const char *ssid = "WEM1"; // *
+const char *password = "wemwemwem"; // *
 
 void run_motor(int y) {
   // FORWARD MOTION
   if (y < 0){ 
     y = abs(y);
-    y = map(y, 0, 200, 102, 255);
-    analogWrite(EN_PIN, y);
+    y = map(y, 0, 200, 0, 255);
+    Serial.println("yes it is");
+    if (y < -50) {
+    analogWrite(EN_PIN, 255);
+    }
   // Below, we set the pin values to the table values for forward motion
   digitalWrite(MOTOR_IN1, HIGH);
   digitalWrite(MOTOR_IN2, LOW);
@@ -33,6 +36,9 @@ void run_motor(int y) {
   else if (y > 0) { 
     y = map(y, 0, 200, 102, 255);
     analogWrite(EN_PIN, abs(y));
+    if (y > 50) {
+    analogWrite(EN_PIN, abs(255));
+    }
   // Here, set the pin values to the table values for reverse motion
   digitalWrite(MOTOR_IN2, HIGH);
   digitalWrite(MOTOR_IN1, LOW);
